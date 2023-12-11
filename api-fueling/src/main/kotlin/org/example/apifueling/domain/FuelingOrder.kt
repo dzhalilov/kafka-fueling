@@ -8,7 +8,8 @@ import java.util.UUID
 
 @Entity
 class FuelingOrder(
-    @Id @GeneratedValue(strategy = GenerationType.UUID) var id: UUID,
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    var id: UUID? = null,
     val clientId: Int,
     val stationId: Int,
     @Enumerated(value = EnumType.STRING)

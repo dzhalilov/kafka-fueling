@@ -2,7 +2,6 @@ package org.example.apifueling.dto
 
 import org.example.apifueling.domain.FuelType
 import org.example.apifueling.domain.FuelingOrder
-import java.util.*
 
 data class FuelingOrderDto(
     var clientId: Int,
@@ -17,6 +16,5 @@ fun FuelingOrderDto.toEntity() = FuelingOrder(
     stationId = stationId,
     fuelType = fuelType,
     quantity = quantity,
-    sum = sum,
-    id = UUID.randomUUID()
+    sum = sum
 )

@@ -15,19 +15,19 @@ class FuelingService(val fuelingOrderRepository: FuelingOrderRepository) {
     fun order(dto: FuelingOrderDto): OrderStatusDto {
         val order = dto.toEntity()
         fuelingOrderRepository.save(order)
-        return OrderStatusDto(order.id, order.status)
+        return order.toStatusDto()
     }
 
     fun getStatus(orderId: UUID): OrderStatusDto = fuelingOrderRepository.findById(orderId).get().toStatusDto()
 }
 
 fun FuelingOrder.toStatusDto() = OrderStatusDto(
-    id = id,
+    id = id!!,
     status = status
 )
 
 fun FuelingOrder.toProcessingDto() = OrderProcessingDto(
-    id = id,
+    id = id!!,
     clientId = clientId,
     stationId = stationId,
     fuelType = fuelType,
