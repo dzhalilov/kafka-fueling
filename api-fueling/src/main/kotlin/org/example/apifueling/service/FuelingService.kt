@@ -1,5 +1,6 @@
 package org.example.apifueling.service
 
+import mu.KotlinLogging
 import org.example.apifueling.domain.FuelingOrder
 import org.example.apifueling.dto.FuelingOrderDto
 import org.example.apifueling.dto.OrderProcessingDto
@@ -7,18 +8,24 @@ import org.example.apifueling.dto.OrderStatusDto
 import org.example.apifueling.dto.toEntity
 import org.example.apifueling.repository.FuelingOrderRepository
 import org.springframework.stereotype.Service
-import java.util.*
+import org.springframework.transaction.annotation.Transactional
 
+private val logger = KotlinLogging.logger {}
 @Service
-class FuelingService(val fuelingOrderRepository: FuelingOrderRepository) {
+class FuelingService(
+    private val fuelingOrderRepository: FuelingOrderRepository,
+    private val processingService: ProcessingService
+) {
 
+    @Transactional
     fun order(dto: FuelingOrderDto): OrderStatusDto {
         val order = dto.toEntity()
         fuelingOrderRepository.save(order)
-        return order.toStatusDto()
+        processingService.processing(order.toProcessingDto())
+        val statusDto = order.toStatusDto()
+        logger.info { "Order sent to processing: $statusDto" }
+        return statusDto
     }
-
-    fun getStatus(orderId: UUID): OrderStatusDto = fuelingOrderRepository.findById(orderId).get().toStatusDto()
 }
 
 fun FuelingOrder.toStatusDto() = OrderStatusDto(
