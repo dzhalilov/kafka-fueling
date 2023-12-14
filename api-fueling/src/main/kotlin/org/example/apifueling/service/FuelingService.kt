@@ -1,27 +1,28 @@
 package org.example.apifueling.service
 
+import model.OrderProcessingDto
+import model.OrderStatusDto
 import mu.KotlinLogging
 import org.example.apifueling.domain.FuelingOrder
 import org.example.apifueling.dto.FuelingOrderDto
-import org.example.apifueling.dto.OrderProcessingDto
-import org.example.apifueling.dto.OrderStatusDto
 import org.example.apifueling.dto.toEntity
 import org.example.apifueling.repository.FuelingOrderRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import service.KafkaOrderService
 
 private val logger = KotlinLogging.logger {}
 @Service
 class FuelingService(
     private val fuelingOrderRepository: FuelingOrderRepository,
-    private val processingService: ProcessingService
+    private val kafkaOrderService: KafkaOrderService
 ) {
 
     @Transactional
     fun order(dto: FuelingOrderDto): OrderStatusDto {
         val order = dto.toEntity()
         fuelingOrderRepository.save(order)
-        processingService.processing(order.toProcessingDto())
+        kafkaOrderService.sendOrderProcessing(order.toProcessingDto())
         val statusDto = order.toStatusDto()
         logger.info { "Order sent to processing: $statusDto" }
         return statusDto
