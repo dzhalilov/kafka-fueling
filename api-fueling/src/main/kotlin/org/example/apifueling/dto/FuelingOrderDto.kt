@@ -1,6 +1,6 @@
 package org.example.apifueling.dto
 
-import org.example.apifueling.domain.FuelType
+import model.FuelType
 import org.example.apifueling.domain.FuelingOrder
 
 data class FuelingOrderDto(

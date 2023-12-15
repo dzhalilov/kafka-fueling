@@ -1,7 +1,7 @@
 package org.example.apifueling.controller
 
+import model.OrderStatusDto
 import org.example.apifueling.dto.FuelingOrderDto
-import org.example.apifueling.dto.OrderStatusDto
 import org.example.apifueling.service.FuelingService
 import org.example.apifueling.service.OrderStatusService
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,6 +1,8 @@
 package org.example.apifueling.domain
 
 import jakarta.persistence.*
+import model.FuelType
+import model.FuelingOrderStatus
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
@@ -23,20 +25,3 @@ class FuelingOrder(
     @Enumerated(value = EnumType.STRING)
     var status: FuelingOrderStatus = FuelingOrderStatus.CREATED
 )
-
-enum class FuelingOrderStatus {
-    CREATED,
-    PROCESSING,
-    FUELLING,
-    CHANGE_DUE,
-    COMPLETED,
-    CANCELED
-}
-
-enum class FuelType {
-    AI_92,
-    AI_95,
-    AI_98,
-    AI_100,
-    DIESEL
-}
