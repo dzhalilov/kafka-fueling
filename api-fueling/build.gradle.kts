@@ -8,6 +8,11 @@ plugins {
     kotlin("plugin.jpa") version "1.9.20"
 }
 
+val cucumberVersion = "7.14.0"
+val kotlinVersion = "1.9.20"
+val testContainersVersion = "1.17.3"
+val kotestVersion = "5.8.0"
+
 group = "org.example"
 version = "0.0.1-SNAPSHOT"
 
@@ -26,8 +31,24 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
     runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // testing
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude("org.junit.vintage", "junit-vintage-engine")
+    }
+    testImplementation("org.junit.platform:junit-platform-suite")
+    // cucumber
+    testImplementation(platform("io.cucumber:cucumber-bom:$cucumberVersion"))
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-spring:$cucumberVersion")
+    // testcontainers
+    testImplementation("org.testcontainers:postgresql:$testContainersVersion")
+    testImplementation("org.testcontainers:kafka:$testContainersVersion")
+    // kotest
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 }
 
 tasks.withType<KotlinCompile> {
@@ -39,4 +60,5 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
 }

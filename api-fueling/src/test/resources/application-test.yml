@@ -1,0 +1,7 @@
+spring:
+  jpa:
+    show-sql: true
+    database: postgresql
+
+service.kafka.topic.processing: FUELING.PROCESSING
+service.kafka.topic.status: FUELING.STATUS
