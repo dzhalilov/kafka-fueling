@@ -1,24 +1,27 @@
 package org.example.apifueling.service
 
-import org.example.apifueling.config.KafkaTopic
-import org.example.apifueling.dto.OrderProcessingDto
-import org.example.apifueling.dto.OrderStatusDto
+import model.OrderProcessingDto
+import model.OrderStatusDto
+import org.example.apifueling.config.KafkaOrderProperties
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
 @Service
 class ProcessingService(
-    private val kafkaProcessingTemplate: KafkaTemplate<String, OrderProcessingDto>,
-    private val kafkaTopic: KafkaTopic,
+    private val producerProcessing: KafkaTemplate<String, OrderProcessingDto>,
+    private val kafkaOrderProperties: KafkaOrderProperties,
     private val orderStatusService: OrderStatusService,
 ) {
 
     fun processing(dto: OrderProcessingDto) {
-        kafkaProcessingTemplate.send(kafkaTopic.processing, dto)
+        producerProcessing.send(kafkaOrderProperties.processing, dto)
     }
 
-    @KafkaListener(topics = ["#{kafkaTopic.status}"], groupId = "fueling-status")
+    @KafkaListener(
+        topics = ["#{kafkaOrderProperties.status}"],
+        groupId = "#{kafkaOrderProperties.statusGroupId}"
+    )
     fun updateStatusOrder(dto: OrderStatusDto) {
         orderStatusService.updateStatusOrder(dto)
     }

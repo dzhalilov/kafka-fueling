@@ -1,6 +1,6 @@
 package org.example.apifueling.cucumber.context
 
-import org.example.apifueling.domain.FuelingOrderStatus
+import model.FuelingOrderStatus
 import java.util.UUID
 
 object ScenarioContext {

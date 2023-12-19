@@ -2,9 +2,9 @@ package org.example.apifueling.cucumber.helper.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.kotest.matchers.shouldBe
+import model.OrderStatusDto
 import org.example.apifueling.cucumber.context.ScenarioContext
 import org.example.apifueling.cucumber.helper.HttpHelper
-import org.example.apifueling.dto.OrderStatusDto
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component

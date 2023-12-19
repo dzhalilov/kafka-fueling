@@ -1,8 +1,8 @@
 package org.example.apifueling.cucumber.step
 
 import io.cucumber.java.ParameterType
+import model.FuelingOrderStatus
 import org.example.apifueling.cucumber.helper.FixtureLoadHelper
-import org.example.apifueling.domain.FuelingOrderStatus
 import org.springframework.http.HttpMethod
 import java.util.*
 

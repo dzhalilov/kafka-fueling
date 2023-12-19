@@ -6,11 +6,11 @@ import io.cucumber.java.ru.Когда
 import io.cucumber.java.ru.Тогда
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import model.FuelingOrderStatus
 import org.example.apifueling.cucumber.context.ScenarioContext
 import org.example.apifueling.cucumber.helper.DbHelper
 import org.example.apifueling.cucumber.helper.HttpHelper
 import org.example.apifueling.cucumber.helper.KafkaHelper
-import org.example.apifueling.domain.FuelingOrderStatus
 import org.springframework.http.HttpMethod
 
 class OrderStepDefinition(

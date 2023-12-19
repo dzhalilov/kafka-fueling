@@ -14,19 +14,19 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
 }
 
-//allprojects {
+allprojects {
     repositories {
         mavenCentral()
-//        maven { setUrl("https://jitpack.io") }
+        maven { url = uri("https://jitpack.io") }
     }
-//}
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-//    implementation("org.github.dzhalilov:lib-kafka-fueling:0.1")
+    implementation("com.github.dzhalilov:lib-kafka-fueling:1.0")
     implementation("org.springframework.kafka:spring-kafka")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")

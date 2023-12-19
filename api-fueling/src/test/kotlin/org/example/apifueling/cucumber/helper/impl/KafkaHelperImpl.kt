@@ -1,9 +1,9 @@
 package org.example.apifueling.cucumber.helper.impl
 
+import model.OrderProcessingDto
+import model.OrderStatusDto
 import mu.KLogging
 import org.example.apifueling.cucumber.helper.KafkaHelper
-import org.example.apifueling.dto.OrderProcessingDto
-import org.example.apifueling.dto.OrderStatusDto
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component

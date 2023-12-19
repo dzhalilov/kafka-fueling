@@ -1,10 +1,10 @@
 package org.example.apifueling.service
 
+import model.OrderProcessingDto
+import model.OrderStatusDto
 import mu.KotlinLogging
 import org.example.apifueling.domain.FuelingOrder
 import org.example.apifueling.dto.FuelingOrderDto
-import org.example.apifueling.dto.OrderProcessingDto
-import org.example.apifueling.dto.OrderStatusDto
 import org.example.apifueling.dto.toEntity
 import org.example.apifueling.repository.FuelingOrderRepository
 import org.springframework.stereotype.Service

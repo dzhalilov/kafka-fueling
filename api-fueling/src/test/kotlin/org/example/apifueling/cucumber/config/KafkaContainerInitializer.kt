@@ -15,6 +15,7 @@ class KafkaContainerInitializer: ApplicationContextInitializer<ConfigurableAppli
                 .of("spring.kafka.producer.bootstrap-servers=${bootstrapServers}")
                 .and("spring.kafka.consumer.bootstrap-servers=${bootstrapServers}")
                 .and("spring.kafka.consumer.auto-offset-reset=earliest")
+                .and("service.kafka.topic.url=${bootstrapServers}")
                 .applyTo(applicationContext.environment)}
     }
 }

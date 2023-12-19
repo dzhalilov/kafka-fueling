@@ -1,9 +1,9 @@
 package org.example.apifueling.cucumber.helper.impl
 
+import model.FuelType
+import model.FuelingOrderStatus
 import org.example.apifueling.cucumber.helper.DbHelper
-import org.example.apifueling.domain.FuelType
 import org.example.apifueling.domain.FuelingOrder
-import org.example.apifueling.domain.FuelingOrderStatus
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate

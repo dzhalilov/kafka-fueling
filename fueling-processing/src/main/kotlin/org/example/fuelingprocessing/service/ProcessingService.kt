@@ -2,12 +2,12 @@ package org.example.fuelingprocessing.service
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import model.FuelingOrderStatus
+import model.FuelingOrderStatus.*
+import model.OrderProcessingDto
+import model.OrderStatusDto
 import mu.KotlinLogging
-import org.example.fuelingprocessing.config.KafkaTopic
-import org.example.fuelingprocessing.domain.FuelingOrderStatus
-import org.example.fuelingprocessing.domain.FuelingOrderStatus.*
-import org.example.fuelingprocessing.dto.OrderProcessingDto
-import org.example.fuelingprocessing.dto.OrderStatusDto
+import org.example.fuelingprocessing.config.KafkaProcessingProperties
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
@@ -16,18 +16,21 @@ private val logger = KotlinLogging.logger {}
 
 @Service
 class ProcessingService(
-    private val kafkaTopic: KafkaTopic,
-    private val kafkaOrderTemplate: KafkaTemplate<String, OrderStatusDto>,
+    private val kafkaProcessingProperties: KafkaProcessingProperties,
+    private val producerFuelingStatus: KafkaTemplate<String, OrderStatusDto>,
 ) {
 
-    @KafkaListener(topics = ["#{kafkaTopic.processing}"], groupId = "fueling-order")
+    @KafkaListener(
+        topics = ["#{kafkaProcessingProperties.processing}"],
+        groupId = "#{kafkaProcessingProperties.orderGroupId}"
+    )
     fun processingOrder(dto: OrderProcessingDto) {
         runBlocking {
             var status = CREATED
             while (status != COMPLETED && status != CANCELED) {
                 delay(3000L)
                 status = processing(status)
-                kafkaOrderTemplate.send(kafkaTopic.status, OrderStatusDto(dto.id, status))
+                producerFuelingStatus.send(kafkaProcessingProperties.status, OrderStatusDto(dto.id, status))
                 logger.info { "Order ${dto.id} set status: $status" }
             }
         }

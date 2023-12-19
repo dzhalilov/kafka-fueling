@@ -1,25 +1,25 @@
 server:
   port: 8080
 
+#spring:
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9093
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    consumer:
+#      group-id: fueling-status
+#      bootstrap-servers: localhost:9093
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      auto-offset-reset: earliest
+#      properties:
+#        spring:
+#          json:
+#            type:
+#              mapping: org.example.fuelingprocessing.dto.OrderStatusDto:org.example.apifueling.dto.OrderStatusDto
+#            trusted.packages: "*"
 spring:
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      group-id: fueling-status
-      bootstrap-servers: localhost:9092
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      auto-offset-reset: earliest
-      properties:
-        spring:
-          json:
-            type:
-              mapping: org.example.fuelingprocessing.dto.OrderStatusDto:org.example.apifueling.dto.OrderStatusDto
-            trusted.packages: "*"
-
   datasource:
     username: postgres
     password: password
@@ -28,6 +28,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
-service.kafka.topic.processing: FUELING.PROCESSING
-service.kafka.topic.status: FUELING.STATUS

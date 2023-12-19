@@ -1,22 +1,26 @@
-spring:
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      group-id: fueling-order
-      bootstrap-servers: localhost:9092
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      auto-offset-reset: earliest
-      properties:
-        spring:
-          json:
-            type:
-              mapping: org.example.apifueling.dto.OrderProcessingDto:org.example.fuelingprocessing.dto.OrderProcessingDto
-            trusted.packages: "*"
-
-
-service.kafka.topic.processing: FUELING.PROCESSING
-service.kafka.topic.status: FUELING.STATUS
+#spring:
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9093
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    consumer:
+#      group-id: fueling-order
+#      bootstrap-servers: localhost:9093
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      auto-offset-reset: earliest
+#      properties:
+#        spring:
+#          json:
+#            type:
+#              mapping: org.example.apifueling.dto.OrderProcessingDto:org.example.fuelingprocessing.dto.OrderProcessingDto
+#            trusted.packages: "*"
+#
+#service:
+#  kafka:
+#    topic:
+#      url: localhost:9093
+#      status: FUELING.STATUS
+#      processing: FUELING.PROCESSING
+#      group-id: fueling-order

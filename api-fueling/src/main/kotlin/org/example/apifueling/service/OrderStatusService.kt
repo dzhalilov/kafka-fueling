@@ -1,7 +1,7 @@
 package org.example.apifueling.service
 
+import model.OrderStatusDto
 import mu.KotlinLogging
-import org.example.apifueling.dto.OrderStatusDto
 import org.example.apifueling.repository.FuelingOrderRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

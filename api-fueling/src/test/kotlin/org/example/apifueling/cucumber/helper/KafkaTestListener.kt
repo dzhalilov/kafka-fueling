@@ -1,7 +1,7 @@
 package org.example.apifueling.cucumber.helper
 
+import model.OrderProcessingDto
 import mu.KLogging
-import org.example.apifueling.dto.OrderProcessingDto
 import org.springframework.context.annotation.Profile
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component

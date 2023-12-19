@@ -1,7 +1,7 @@
 package org.example.apifueling.cucumber.helper
 
-import org.example.apifueling.dto.OrderProcessingDto
-import org.example.apifueling.dto.OrderStatusDto
+import model.OrderProcessingDto
+import model.OrderStatusDto
 
 interface KafkaHelper {
 

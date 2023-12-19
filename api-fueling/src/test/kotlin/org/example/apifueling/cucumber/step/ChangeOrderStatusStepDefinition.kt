@@ -5,12 +5,12 @@ import io.cucumber.java.ru.И
 import io.cucumber.java.ru.Когда
 import io.cucumber.java.ru.Тогда
 import io.kotest.matchers.shouldBe
+import model.FuelingOrderStatus
+import model.OrderStatusDto
 import mu.KLogging
 import org.example.apifueling.cucumber.context.ScenarioContext
 import org.example.apifueling.cucumber.helper.DbHelper
 import org.example.apifueling.cucumber.helper.KafkaHelper
-import org.example.apifueling.domain.FuelingOrderStatus
-import org.example.apifueling.dto.OrderStatusDto
 import java.util.*
 
 class ChangeOrderStatusStepDefinition(
