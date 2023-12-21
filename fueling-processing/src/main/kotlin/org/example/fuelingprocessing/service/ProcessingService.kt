@@ -1,7 +1,8 @@
 package org.example.fuelingprocessing.service
 
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import mu.KotlinLogging
 import org.example.fuelingprocessing.config.KafkaTopic
 import org.example.fuelingprocessing.domain.FuelingOrderStatus
@@ -22,7 +23,7 @@ class ProcessingService(
 
     @KafkaListener(topics = ["#{kafkaTopic.processing}"], groupId = "fueling-order")
     fun processingOrder(dto: OrderProcessingDto) {
-        runBlocking {
+        GlobalScope.launch {
             var status = CREATED
             while (status != COMPLETED && status != CANCELED) {
                 delay(3000L)
