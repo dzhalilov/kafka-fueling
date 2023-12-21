@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
-@RestController
-@RequestMapping("/api/v1/fueling")
-class FuelingController(
-    private val fuelingService: FuelingService,
-    private val orderStatusService: OrderStatusService
-) {
-
-    @PostMapping("/order")
-    fun order(@RequestBody dto: FuelingOrderDto): OrderStatusDto = fuelingService.order(dto)
-
-    @GetMapping("/status/{orderId}")
-    fun getStatus(@PathVariable orderId: UUID): OrderStatusDto = orderStatusService.getStatus(orderId)
-}
+//@RestController
+//@RequestMapping("/api/v1/fueling")
+//class FuelingController(
+//    private val fuelingService: FuelingService,
+//    private val orderStatusService: OrderStatusService
+//) {
+//
+//    @PostMapping("/order")
+//    fun order(@RequestBody dto: FuelingOrderDto): OrderStatusDto = fuelingService.order(dto)
+//
+//    @GetMapping("/status/{orderId}")
+//    fun getStatus(@PathVariable orderId: UUID): OrderStatusDto = orderStatusService.getStatus(orderId)
+//}

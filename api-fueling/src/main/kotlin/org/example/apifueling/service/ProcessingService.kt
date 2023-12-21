@@ -12,6 +12,7 @@ class ProcessingService(
     private val kafkaProcessingTemplate: KafkaTemplate<String, OrderProcessingDto>,
     private val kafkaTopic: KafkaTopic,
     private val orderStatusService: OrderStatusService,
+    private val cashedStatusService: CashedStatusService
 ) {
 
     fun processing(dto: OrderProcessingDto) {
@@ -20,6 +21,7 @@ class ProcessingService(
 
     @KafkaListener(topics = ["#{kafkaTopic.status}"], groupId = "fueling-status")
     fun updateStatusOrder(dto: OrderStatusDto) {
+        cashedStatusService.addOrder(dto)
         orderStatusService.updateStatusOrder(dto)
     }
 }
