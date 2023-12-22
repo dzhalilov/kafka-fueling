@@ -31,7 +31,7 @@ public class FuelingController {
     @PostMapping(value = "/order", produces = MediaType.APPLICATION_NDJSON_VALUE)
     public Flux<OrderStatusDto> order(@RequestBody FuelingOrderDto dto) {
         OrderStatusDto order = fuelingService.order(dto);
-        return Flux.just(order).concatWith(cashedStatusService.getOrderStatusById(order));
+        return Flux.just(order).concatWith(cashedStatusService.getOrderStatusByIdV2(order));
     }
 
     // for demonstration purposes in browser

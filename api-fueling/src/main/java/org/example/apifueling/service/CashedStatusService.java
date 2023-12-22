@@ -4,6 +4,8 @@ import org.example.apifueling.domain.FuelingOrderStatus;
 import org.example.apifueling.dto.OrderStatusDto;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -29,6 +31,17 @@ public class CashedStatusService {
                 })
                 .log()
                 .cast(OrderStatusDto.class);
+    }
+
+    public Flux<OrderStatusDto> getOrderStatusByIdV2(OrderStatusDto dto) {
+        return Mono.fromCallable(() -> map.remove(dto.getId()))
+                .subscribeOn(Schedulers.boundedElastic())
+                .repeatWhenEmpty(t -> t.delaySequence(Duration.ofMillis(STEP_MILLIS)))
+                .flux()
+                .repeat()
+                .take(Duration.ofSeconds(TIMEOUT_SECONDS))
+                .takeUntil(t -> t.getStatus().equals(FuelingOrderStatus.COMPLETED) || t.getStatus().equals(FuelingOrderStatus.CANCELED))
+                .log();
     }
 
     private OrderStatusDto getTimedOrderById(UUID id, Duration timeout) {
