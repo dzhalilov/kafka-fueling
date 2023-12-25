@@ -1,3 +1,5 @@
+docker-compose для поднятия Kafka
+
 To check Reactor sent CURL:
 curl --location 'localhost:8080/api/v1/fueling/order' --no-buffer \
 --header 'Content-Type: application/stream+json' \
